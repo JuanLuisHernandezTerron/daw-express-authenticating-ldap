@@ -22,5 +22,13 @@ pipeline {
       }
     }
 
+    stage('Deliver') {
+      steps {
+        sh './jenkins/scripts/deliver.sh'
+        input '<"Proceed" to continue'
+        sh './jenkins/scripts/kill.sh'
+      }
+    }
+
   }
 }
