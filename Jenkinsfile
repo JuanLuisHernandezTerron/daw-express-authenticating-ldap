@@ -13,5 +13,22 @@ pipeline {
       }
     }
 
+    stage('Test') {
+      environment {
+        CI = 'true'
+      }
+      steps {
+        sh 'npm test'
+      }
+    }
+
+    stage('Deliver') {
+      steps {
+        sh 'npm start'
+        input 'Finished using the web site? (Select "Proceed" to continue)'
+        sh './jenkins/scripts/kill.sh'
+      }
+    }
+
   }
 }
