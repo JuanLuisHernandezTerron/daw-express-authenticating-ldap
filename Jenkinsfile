@@ -24,10 +24,11 @@ pipeline {
 
     stage('Deliver') {
       steps {
-        sh '''chmod +x -R ${env.WORKSPACE}
-./jenkins/scripts/deliver.sh'''
+        sh './jenkins/scripts/deliver.sh'
         input 'Finished using the web site? (Select "Proceed" to continue)'
         sh './jenkins/scripts/kill.sh'
+        sh '''chmod +x -R ${env.WORKSPACE}
+'''
       }
     }
 
